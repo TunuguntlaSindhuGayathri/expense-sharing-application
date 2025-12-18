@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "607e09c5-d282-43f3-9d49-86ef1736683d",
+		"name": "ExpenseSharingApplication_Collection",
+		"description": "### Welcome to Postman!",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50911783",
+		"_collection_link": "https://tsindhu850-1810598.postman.co/workspace/Sindhu-Gayathri-Tunuguntla's-Wo~c4d15bef-11fb-4d11-8c33-1490919d517f/collection/50911783-607e09c5-d282-43f3-9d49-86ef1736683d?action=share&source=collection_link&creator=50911783"
+	},
+	"item": [
+		{
+			"name": "Add an Expense(Equal)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"expenseId\": \"e1\",\n  \"amount\": 1000,\n  \"paidBy\": { \"userId\": \"u1\", \"name\": \"Alice\" },\n  \"splitType\": \"EQUAL\",\n  \"splits\": [\n    { \"user\": { \"userId\": \"u1\", \"name\": \"Alice\" } },\n    { \"user\": { \"userId\": \"u2\", \"name\": \"Bob\" } }\n  ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/expenses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"expenses"
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"userId\": \"u2\",\n  \"name\": \"Bob\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Create a group",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"groupId\": \"g1\",\n  \"name\": \"Trip\",\n  \"members\": [\n    { \"userId\": \"u1\", \"name\": \"Alice\" },\n    { \"userId\": \"u2\", \"name\": \"Bob\" }\n  ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/groups",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Balances",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/balances",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"balances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add an Expense(Exact)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"expenseId\": \"e2\",\n  \"amount\": 1200,\n  \"paidBy\": { \"userId\": \"u2\", \"name\": \"Bob\" },\n  \"splitType\": \"EXACT\",\n  \"splits\": [\n    {\n      \"user\": { \"userId\": \"u1\", \"name\": \"Alice\" },\n      \"amount\": 700\n    },\n    {\n      \"user\": { \"userId\": \"u2\", \"name\": \"Bob\" },\n      \"amount\": 500\n    }\n  ]\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/expenses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"expenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add an Expense(Percentage)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"expenseId\": \"e3\",\n  \"amount\": 1000,\n  \"paidBy\": { \"userId\": \"u1\", \"name\": \"Alice\" },\n  \"splitType\": \"PERCENTAGE\",\n  \"splits\": [\n    {\n      \"user\": { \"userId\": \"u1\", \"name\": \"Alice\" },\n      \"percentage\": 40\n    },\n    {\n      \"user\": { \"userId\": \"u2\", \"name\": \"Bob\" },\n      \"percentage\": 60\n    }\n  ]\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/expenses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"expenses"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
