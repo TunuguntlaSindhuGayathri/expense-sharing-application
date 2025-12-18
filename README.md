@@ -46,3 +46,12 @@ A Postman collection is included to test all APIs and split types.
 - In-memory storage
 - Single currency
 - No authentication
+
+---
+
+## 📸 Sample API Response
+
+Balance calculation tested using Postman:
+
+![Balance Response](postman-balance-response.png)
+
